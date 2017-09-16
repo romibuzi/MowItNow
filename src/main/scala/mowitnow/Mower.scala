@@ -1,9 +1,10 @@
 package mowitnow
 
-class Mower(x: Int, y: Int, dc: Char, lawn: Lawn) {
+class Mower(x: Int, y: Int, dc: Char, lawnc: Lawn) {
   var position = Position(x, y)
   var direction = Direction(dc)
   var commands: List[Command] = List[Command]()
+  val lawn: Lawn = lawnc
 
   override def toString: String =
     s"(x:${position.x}, y:${position.y}, direction:${direction.d})"

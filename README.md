@@ -11,6 +11,12 @@ and a given initial position (x,y) on the lawn (which has a given width and heig
 
 Scala >= 2.12 and [sbt](http://www.scala-sbt.org/)
 
+### Run
+
+```
+$ sbt run
+```
+
 ### Tests
 
 ```
