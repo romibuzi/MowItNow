@@ -3,9 +3,13 @@ package mowitnow
 import scala.collection.mutable
 
 class Parser {
-  def parseLines(lines: List[String]): mutable.MutableList[Mower] = {
+  def parseInstructions(instructions: List[String]): List[Mower] = {
+    assert(
+      instructions.size >= 3,
+      "Instructions should contains at least 3 lines (one for lawn size and two for mower infos)")
+
     // First line is the size of the lawn
-    val (lawnSize, mowersInstructions) = lines.splitAt(1)
+    val (lawnSize, mowersInstructions) = instructions.splitAt(1)
 
     // Other following lines (by group of 2) contains each mower informations
     val mowersInfos = mowersInstructions.grouped(2).toList
@@ -21,7 +25,7 @@ class Parser {
       mowers += mower
     })
 
-    mowers
+    mowers.toList
   }
 
   private def parseLawnSizes(lawnSize: String): Lawn = {

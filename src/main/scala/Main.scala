@@ -7,7 +7,7 @@ object Main {
     val lines = Source.fromResource("instructions.txt").getLines.toList
 
     val parser = new Parser
-    val mowers = parser.parseLines(lines)
+    val mowers = parser.parseInstructions(lines)
 
     mowers.foreach(mower => {
       mower.move()

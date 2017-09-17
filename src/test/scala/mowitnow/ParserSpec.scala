@@ -17,7 +17,7 @@ class ParserSpec extends FlatSpec with Matchers with BeforeAndAfter {
     buffer.append("1 2 N") // second line is mower's initial position
     buffer.append("GAGAGAGAA") // third line contains mower's instructions
 
-    val mowers = parser parseLines buffer.toList
+    val mowers = parser parseInstructions buffer.toList
     mowers.size should be(1)
 
     val mower = mowers.head
@@ -29,12 +29,19 @@ class ParserSpec extends FlatSpec with Matchers with BeforeAndAfter {
     mower.lawn should be(Lawn(5, 5))
   }
 
+  // not valid instructions specs
+
+  "Parser" should "throw an error when not enough instructions are given" in {
+    buffer.append("5 5") // just the lawn size is given
+    an[AssertionError] should be thrownBy (parser parseInstructions buffer.toList)
+  }
+
   "Parser" should "throw an error when incorrect lawn size is given" in {
     buffer.append("-5 eight") // error here
     buffer.append("1 2 N")
     buffer.append("GAGAGAGAA")
 
-    an[IllegalArgumentException] should be thrownBy (parser parseLines buffer.toList)
+    an[IllegalArgumentException] should be thrownBy (parser parseInstructions buffer.toList)
   }
 
   "Parser" should "throw an error when incorrect mowers infos are given" in {
@@ -42,6 +49,6 @@ class ParserSpec extends FlatSpec with Matchers with BeforeAndAfter {
     buffer.append("1 three East") // error here
     buffer.append("GAGAGAGAA")
 
-    an[IllegalArgumentException] should be thrownBy (parser parseLines buffer.toList)
+    an[IllegalArgumentException] should be thrownBy (parser parseInstructions buffer.toList)
   }
 }
