@@ -1,9 +1,6 @@
 package mowitnow
 
-case class Position(xc: Int, yc: Int) {
-  var x: Int = xc
-  var y: Int = yc
-
+case class Position(x: Int, y: Int) {
   def change(direction: Direction): Position = {
     direction match {
       case Direction.North => Position(x, y + 1)
